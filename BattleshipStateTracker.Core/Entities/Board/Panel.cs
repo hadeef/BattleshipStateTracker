@@ -23,15 +23,16 @@ namespace BattleshipStateTracker.Core
 
         public uint RowDimension { get; }
 
-        public IList<IPoint> Points { get; set; }
+        public IList<IPoint> Points { get; }
+
+        public IList<IShip> Ships { get; set; }
 
         public IList<IPoint>? AllAvailablePoints => Points.Where(p => p.OccupancyStatus == PointOccupancyStatus.Available).ToList();
+        public IList<IPoint>? AllUnAvailablePoints => Points.Where(p => p.OccupancyStatus == PointOccupancyStatus.Occupied).ToList();
         public IList<IPoint>? AllNotAttackedPoints => Points.Where(p => p.AttackStatus == PointAttackStatus.NotAttacked).ToList();
 
-        private bool ChangePointAttackStatusToAttacked(IPoint point)
-        {
-            Points.Where(p => p.Row == point.Row && p.Column == point.Column).
-        }
+        public bool AreAllShipsSunk => (AllUnAvailablePoints is not null)
+                                       && AllUnAvailablePoints.All(point => point.AttackResultStatus == PointAttackedResultStatus.Hit);
 
         /// <summary>
         /// Return match points in panel with given points which are available.
@@ -125,7 +126,7 @@ namespace BattleshipStateTracker.Core
         {
             if (AllAvailablePoints == null
                 || AllAvailablePoints.Count == 0
-                || !PointsUtilies.CheckPointsContainPoint(AllAvailablePoints, startPoint))
+                || (PointsUtilies.CheckPointsContainPoint(AllAvailablePoints, startPoint) is null))
             {
                 return false;
             }
@@ -175,22 +176,41 @@ namespace BattleshipStateTracker.Core
         }
 
         /// <summary>
-        /// Place ship to current panel.
+        /// Shows attack result to a point in the panel.
         /// </summary>
-        /// <param name="ship"></param>
-        /// <param name="startPoint">Starting point on the panel to place ship</param>
-        /// <returns>Returns true after adding ship to panel or false if not able to add.</returns>
-        public string Attack(IShip ship, IPoint startPoint)
+        /// <param name="attackPoint">The point which attack will be on it.</param>
+        /// <returns>Returns attack result.</returns>
+        public string Attack(IPoint attackPoint)
         {
             if (AllNotAttackedPoints == null || AllNotAttackedPoints.Count == 0)
             {
                 return PanelAttackedResult.NoAttackPointAvailable;
             }
-            else if (!PointsUtilies.CheckPointsContainPoint(AllNotAttackedPoints, startPoint))
+
+            IPoint? point = PointsUtilies.CheckPointsContainPoint(AllNotAttackedPoints, attackPoint);
+
+            if (point is null)
             {
-                return PanelAttackedResult.AttackPointNotFoundOrAvailable;
+                return PanelAttackedResult.AttackPointNotFoundOrNotAvailable;
             }
 
+            point.AttackStatus = PointAttackStatus.Attacked;
+
+            if (point.OccupancyStatus == PointOccupancyStatus.Occupied)
+            {
+                if (AreAllShipsSunk)
+                {
+                    return PanelAttackedResult.AllShipsSunk;
+                }
+                else
+                {
+                    return PanelAttackedResult.ItWasAHit;
+                }
+            }
+            else
+            {
+                return PanelAttackedResult.ItWasAMiss;
+            }
         }
     }
 }

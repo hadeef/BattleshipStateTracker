@@ -63,18 +63,7 @@ namespace BattleshipStateTracker.Core
         /// <param name="points">The list of points to check inside</param>
         /// <param name="point">The point for checking</param>
         /// <returns></returns>
-        public static bool CheckPointsContainPoint(IList<IPoint> points, IPoint point)
-        {
-            return points.Any(p => p.Row == point.Row && p.Column == point.Column);
-        }
-
-        /// <summary>
-        /// Find a point inside a points list based on coordinates.
-        /// </summary>
-        /// <param name="points">The list of points to search inside</param>
-        /// <param name="point">The point with looking coordinates</param>
-        /// <returns></returns>
-        public static IPoint? FindPointBasedOnCoordinates(IList<IPoint> points, IPoint point)
+        public static IPoint? CheckPointsContainPoint(IList<IPoint> points, IPoint point)
         {
             return points.FirstOrDefault(p => p.Row == point.Row && p.Column == point.Column);
         }

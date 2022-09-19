@@ -30,12 +30,12 @@
 
         public static class PanelAttackedResult
         {
-            public const string NoAttackPointAvailable = "Attacked Result: No attack point available!";
-            public const string AttackPointNotFoundOrAvailable = "Attacked Result: Attack point not found or not available!";
+            public const string NoAttackPointAvailable = "Attack Result: No attack point available!";
+            public const string AttackPointNotFoundOrNotAvailable = "Attack Result: Attack point not found or not available!";
 
-            public const string ItWasAHit = "Attacked Result: It was a hit!";
-            public const string ItWasAMiss = "Attacked Result: It was a miss!";
-            public const string ItWasASink = "Attacked Result: It was a sink!";
+            public const string ItWasAHit = "Attack Result: It was a hit!";
+            public const string ItWasAMiss = "Attack Result: It was a miss!";
+            public const string AllShipsSunk = "Attack Result: All the ships have sunk. Player has lost the game!";
         }
 
         public static class MovingDirectionOnPoints

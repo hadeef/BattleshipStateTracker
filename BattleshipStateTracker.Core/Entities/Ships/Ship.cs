@@ -12,7 +12,5 @@
         public Guid Id { get; }
         public string Name { get; }
         public uint Length { get; }
-        public uint Hits { get; set; }
-        public bool IsSunk => Hits >= Length;
     }
 }
