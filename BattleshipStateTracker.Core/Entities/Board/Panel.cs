@@ -122,25 +122,24 @@ namespace BattleshipStateTracker.Core
         /// Place ship to current panel in an intended point.
         /// </summary>
         /// <param name="ship"></param>
-        /// <param name="startPoint">Starting point on the panel to place ship</param>
         /// <returns>Returns true after adding ship to panel or false if not able to add.</returns>
-        public bool PlaceShipOnPanel(IShip ship, IPoint startPoint)
+        public bool PlaceShipOnPanel(IShip ship
         {
-            if (AllAvailablePoints == null
-                || AllAvailablePoints.Count == 0
-                || (PointsUtilies.CheckPointsContainPoint(AllAvailablePoints, startPoint) is null))
+
+            if ((AllAvailablePoints == null) || (AllAvailablePoints.Count == 0))
             {
                 return false;
             }
 
-            IList<IPoint>? points = GetPointsToPlaceShipOnPanelWithStartPoint(ship, startPoint);
+            IList<IPoint>? points = AllAvailablePoints.ReturnAdjacentAvailablePoints(ship.Length);
 
             if (points == null)
             {
                 return false;
             }
 
-            Points.Where(point => points.Contains(point)).ToList().ForEach(p => p.ShipId = ship.Id);
+            //Points.Where(point => points.CheckPointsContainPointExtension(point)).ToList().ForEach(p => p.ShipId = ship.Id);
+            points.ToList().ForEach(p => p.ShipId = ship.Id);
             Ships.Add(ship);
 
             return true;

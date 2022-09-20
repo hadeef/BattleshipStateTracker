@@ -4,7 +4,7 @@
     {
         public Ship(string name, uint length)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Name = name;
             Length = length;
         }

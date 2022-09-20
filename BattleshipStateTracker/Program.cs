@@ -2,7 +2,7 @@
 
 using BattleshipStateTracker.Core;
 
-IPoint point = new Point(2, 2);
+IPoint point = new Point(1, 1);
 
 //IList<IPoint>? points = PointsUtilies.ReturnAjacentPoints(point, 3, MovingDirectionOnPoints.RowBackward);
 
@@ -15,7 +15,7 @@ IList<IPoint>? av = panel.AllAvailablePoints;
 IList<IPoint>? av2 = panel.AllUnAvailablePoints;
 bool av3 = panel.AreAllShipsSunk;
 
-IEnumerable<IPoint>? av4 = panel.Points.Where(p => p.ShipId != null);
+List<IPoint>? av4 = panel.Points.Where(p => p.ShipId != null).ToList();
 
 Console.WriteLine("Hello, World!");
 

@@ -37,13 +37,5 @@
             public const string ItWasAMiss = "Attack Result: It was a miss!";
             public const string AllShipsSunk = "Attack Result: All the ships have sunk. Player has lost the game!";
         }
-
-        public static class MovingDirectionOnPoints
-        {
-            public const string ColumnForward = "Column Forward";
-            public const string ColumnBackward = "Column Backward";
-            public const string RowForward = "Row Forward";
-            public const string RowBackward = "Row Backward";
-        }
     }
 }
