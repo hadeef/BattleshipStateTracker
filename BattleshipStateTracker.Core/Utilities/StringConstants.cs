@@ -1,6 +1,6 @@
 ﻿namespace BattleshipStateTracker.Core
 {
-    internal class StringConstants
+    public class StringConstants
     {
         public static class ShipTypes
         {

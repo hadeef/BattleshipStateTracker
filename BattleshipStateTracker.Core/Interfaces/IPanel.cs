@@ -11,9 +11,9 @@
         IList<IPoint>? AllNotAttackedPoints { get; }
         bool AreAllShipsSunk { get; }
 
-        IList<IPoint>? GeAllAvailablePointsFromPanel();
-        IList<IPoint>? GetMatchAndAvailabePointsFromPanel(IList<IPoint>? points);
-        IList<IPoint>? GetPointsToPlaceShipOnPanelWithStartPoint(IShip ship, IPoint startPoint);
+        //IList<IPoint>? GeAllAvailablePointsFromPanel();
+        //IList<IPoint>? GetMatchAndAvailabePointsFromPanel(IList<IPoint>? points);
+        //IList<IPoint>? GetPointsToPlaceShipOnPanelWithStartPoint(IShip ship, IPoint startPoint);
         bool PlaceShipOnPanel(IShip ship);
         bool PlaceShipOnPanel(IShip ship, IPoint startPoint);
 
