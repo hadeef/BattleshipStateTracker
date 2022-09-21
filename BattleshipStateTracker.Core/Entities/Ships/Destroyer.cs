@@ -4,7 +4,7 @@ namespace BattleshipStateTracker.Core
 {
     public class Destroyer : Ship
     {
-        public Destroyer() : base(ShipTypes.Destroyer, 2)
+        public Destroyer() : base(ShipTypes.Destroyer, 10)
         {
         }
     }
