@@ -31,11 +31,20 @@
         public static class PanelAttackedResult
         {
             public const string NoAttackPointAvailable = "Attack Result: No attack point available!";
-            public const string AttackPointNotFoundOrNotAvailable = "Attack Result: Attack point not found or not available!";
+            public const string AttackPointNotFound = "Attack Result: Attack point not found!";
+            public const string AttackPointAlreadyBeenAttacked = "Attack Result: Attack point already been attacked!";
 
             public const string ItWasAHit = "Attack Result: It was a hit!";
             public const string ItWasAMiss = "Attack Result: It was a miss!";
             public const string AllShipsSunk = "Attack Result: All the ships have sunk. Player has lost the game!";
+        }
+
+        public static class PlaceShipResult
+        {
+            public const string NoAvailablePoints = "No available points";
+            public const string NotEnoughAvailablePoints = "Not enough available points";
+            public const string ShipAlreadyPlaced = "Ship already placed";
+            public const string Successful = "Successful";
         }
     }
 }

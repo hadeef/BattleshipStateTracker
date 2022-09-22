@@ -10,9 +10,9 @@ namespace BattleshipStateTracker.Core
         /// <param name="points">The list of points to  look in.</param>
         /// <param name="point">The looking point</param>
         /// <returns></returns>
-        public static bool IsAnyMatchPoint(this IList<IPoint>? points, IPoint point)
+        public static bool IsAnyMatchPoint(this IList<IPoint> points, IPoint point)
         {
-            if (points == null || points.Count == 0 || points == null)
+            if (points.Count == 0 || points == null)
             {
                 return false;
             }
@@ -27,9 +27,9 @@ namespace BattleshipStateTracker.Core
         /// <param name="points">The list of points to  look in.</param>
         /// <param name="point">The looking point</param>
         /// <returns></returns>
-        public static IPoint? GetMatchPoint(this IList<IPoint>? points, IPoint point)
+        public static IPoint? GetMatchPoint(this IList<IPoint> points, IPoint point)
         {
-            if (points == null || points.Count == 0 || points == null)
+            if (points.Count == 0 || points == null)
             {
                 return null;
             }
@@ -44,11 +44,9 @@ namespace BattleshipStateTracker.Core
         /// <param name="mainPoints">The list of points to look in.</param>
         /// <param name="point">given point</param>
         /// <returns></returns>
-        public static IPoint? GetMatchAndAvailablePoint(this IList<IPoint>? mainPoints, IPoint? point)
+        public static IPoint? GetMatchAndAvailablePoint(this IList<IPoint> mainPoints, IPoint point)
         {
-            if (mainPoints == null
-                || mainPoints.Count == 0
-                || point == null)
+            if (mainPoints.Count == 0 || point == null)
             {
                 return null;
             }
@@ -66,17 +64,14 @@ namespace BattleshipStateTracker.Core
         /// <param name="mainPoints">The list of points to look in.</param>
         /// <param name="subPoint">The list of given points</param>
         /// <returns></returns>
-        public static IList<IPoint>? GetMatchAndAvailablePoints(this IList<IPoint>? mainPoints, IList<IPoint>? subPoint)
+        public static IList<IPoint> GetMatchAndAvailablePoints(this IList<IPoint> mainPoints, IList<IPoint> subPoint)
         {
-            if (mainPoints == null
-                || mainPoints.Count == 0
-                || subPoint == null
-                || subPoint.Count == 0)
-            {
-                return null;
-            }
-
             IList<IPoint> matchPoints = new List<IPoint>();
+
+            if (mainPoints.Count == 0 || subPoint.Count == 0)
+            {
+                return matchPoints;
+            }
 
             foreach (IPoint point in subPoint)
             {
@@ -90,14 +85,7 @@ namespace BattleshipStateTracker.Core
                 }
             }
 
-            if (matchPoints.Count == subPoint.Count) //Return only if in the same length!.
-            {
-                return matchPoints;
-            }
-            else
-            {
-                return null;
-            }
+            return matchPoints;
         }
 
         /// <summary>
@@ -106,30 +94,31 @@ namespace BattleshipStateTracker.Core
         /// <param name="Points">The list of points to look in</param>
         /// <param name="length">Length of adjacent points</param>
         /// <returns>Returns list of points.</returns>
-        public static IList<IPoint>? ReturnAdjacentAvailablePoints(this IList<IPoint>? Points, uint length)
+        public static IList<IPoint> ReturnAdjacentAvailablePoints(this IList<IPoint> Points, uint length)
         {
-            if (Points == null || Points.Count == 0 || length == 0)
+            IPoint startPoint;
+            Random? random = new();
+            IList<IPoint> matchPoints = new List<IPoint>();
+            IList<int> selectedRandomIndexes = new List<int>();
+
+            if (Points.Count == 0 || length == 0 || Points.Count < length)
             {
-                return null;
+                return matchPoints;
             }
 
-            IPoint startPoint;
-            int index;
-            Random? random = new();
-            IList<int> selectedRandomIndexes = new List<int>();
+            for (int i = 0; i < Points.Count; i++)
+            {
+                selectedRandomIndexes.Add(i);
+            }
 
             do
             {
-                do
-                {
-                    index = random.Next(Points.Count - 1); //New random index to select random startPoint.
+                int index = random.Next(selectedRandomIndexes.Count - 1);
+                int pointSelectIndex = selectedRandomIndexes[index]; //New random index to select random startPoint.
+                selectedRandomIndexes.RemoveAt(index);
 
-                } while (selectedRandomIndexes.Contains(index));
+                startPoint = Points[pointSelectIndex];
 
-                startPoint = Points[index];
-                selectedRandomIndexes.Add(index);
-
-                IList<IPoint>? matchPoints;
                 IList<IPoint> points = new List<IPoint>();
                 IPoint Point;
 
@@ -141,9 +130,13 @@ namespace BattleshipStateTracker.Core
                 }
 
                 matchPoints = Points.GetMatchAndAvailablePoints(points);
-                if ((matchPoints is not null) && matchPoints.Count == length) //Return only if long enough!.
+                if (matchPoints.Count == length) //Return only if long enough!.
                 {
                     return matchPoints;
+                }
+                else
+                {
+                    matchPoints.Clear();
                 }
 
                 //direction is column backward
@@ -161,9 +154,13 @@ namespace BattleshipStateTracker.Core
                 }
 
                 matchPoints = Points.GetMatchAndAvailablePoints(points);
-                if ((matchPoints is not null) && matchPoints.Count == length) //Return only if long enough!.
+                if (matchPoints.Count == length) //Return only if long enough!.
                 {
                     return matchPoints;
+                }
+                else
+                {
+                    matchPoints.Clear();
                 }
 
                 //direction is row forward
@@ -174,9 +171,13 @@ namespace BattleshipStateTracker.Core
                 }
 
                 matchPoints = Points.GetMatchAndAvailablePoints(points);
-                if ((matchPoints is not null) && matchPoints.Count == length) //Return only if long enough!.
+                if (matchPoints.Count == length) //Return only if long enough!.
                 {
                     return matchPoints;
+                }
+                else
+                {
+                    matchPoints.Clear();
                 }
 
                 //direction is row backward
@@ -194,14 +195,18 @@ namespace BattleshipStateTracker.Core
                 }
 
                 matchPoints = Points.GetMatchAndAvailablePoints(points);
-                if ((matchPoints is not null) && matchPoints.Count == length) //Return only if long enough!.
+                if (matchPoints.Count == length) //Return only if long enough!.
                 {
                     return matchPoints;
                 }
+                else
+                {
+                    matchPoints.Clear();
+                }
 
-            } while (selectedRandomIndexes.Count < Points.Count); //If matchPoints is null try new random startPoint. 
+            } while (selectedRandomIndexes.Count > 0); //If matchPoints is null try new random startPoint. 
 
-            return null;
+            return matchPoints;
         }
     }
 }

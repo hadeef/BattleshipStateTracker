@@ -1,21 +1,22 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using BattleshipStateTracker.Core;
+﻿using BattleshipStateTracker.Core;
 
 IPoint point = new Point(1, 1);
 
-//IList<IPoint>? points = PointsUtilies.ReturnAjacentPoints(point, 3, MovingDirectionOnPoints.RowBackward);
+Panel panel = new();
 
-Panel? panel = new(10, 10);
-Destroyer? ship = new Destroyer();
+for (int i = 1; i < 21; i++)
+{
+    Destroyer? ship = new();
+    string? ss = panel.PlaceShip(ship);
+}
 
-panel.PlaceShipOnPanel(ship);
-
-IList<IPoint>? av = panel.AllAvailablePoints;
-IList<IPoint>? av2 = panel.AllUnAvailablePoints;
+IList<IPoint> av = panel.AvailablePoints;
+IList<IPoint> av2 = panel.UnAvailablePoints;
 bool av3 = panel.AreAllShipsSunk;
 
 List<IPoint>? av4 = panel.Points.Where(p => p.ShipId != null).ToList();
+
+string attackResult = panel.Attack(point);
 
 Console.WriteLine("Hello, World!");
 
