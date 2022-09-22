@@ -1,5 +1,7 @@
 ﻿using BattleshipStateTracker.Core;
 
+Player player = new();
+
 IPoint point = new Point(1, 1);
 
 Board board = new();
