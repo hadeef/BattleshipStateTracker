@@ -2,10 +2,10 @@
 
 namespace BattleshipStateTracker.Core
 {
-    public class Panel : IPanel
+    public class Board : IBoard
     {
         private const int dimension = 10;
-        public Panel()
+        public Board()
         {
             Points = new List<IPoint>();
             for (uint i = 1; i <= dimension; i++)
@@ -31,7 +31,7 @@ namespace BattleshipStateTracker.Core
                                        && UnAvailablePoints.All(point => point.AttackResultStatus == PointAttackedResultStatus.Hit);
 
         /// <summary>
-        /// Checks if ship already placed on panel or not.
+        /// Checks if ship already placed on board or not.
         /// </summary>
         /// <param name="ship"></param>
         /// <returns></returns>
@@ -42,10 +42,10 @@ namespace BattleshipStateTracker.Core
         }
 
         /// <summary>
-        /// Place ship to current panel in an intended point.
+        /// Place ship to current board in an intended point.
         /// </summary>
         /// <param name="ship"></param>
-        /// <returns>Returns true after adding ship to panel or false if not able to add.</returns>
+        /// <returns>Returns true after adding ship to board or false if not able to add.</returns>
         public string PlaceShip(IShip ship)
         {
             if (AvailablePoints.Count == 0)
@@ -71,7 +71,7 @@ namespace BattleshipStateTracker.Core
         }
 
         /// <summary>
-        /// Shows attack result to a point in the panel.
+        /// Shows attack result to a point in the board.
         /// </summary>
         /// <param name="attackPoint">The point which attack will be on it.</param>
         /// <returns>Returns attack result string.</returns>
@@ -81,20 +81,20 @@ namespace BattleshipStateTracker.Core
 
             if (NotAttackedPoints.Count == 0)
             {
-                return PanelAttackedResult.NoAttackPointAvailable;
+                return BoardAttackedResult.NoAttackPointAvailable;
             }
 
             point = AttackedPoints.GetMatchPoint(attackPoint);
             if (point is not null)
             {
-                return PanelAttackedResult.AttackPointAlreadyBeenAttacked;
+                return BoardAttackedResult.AttackPointAlreadyBeenAttacked;
             }
 
             point = NotAttackedPoints.GetMatchPoint(attackPoint);
 
             if (point is null)
             {
-                return PanelAttackedResult.AttackPointNotFound;
+                return BoardAttackedResult.AttackPointNotFound;
             }
 
             point.AttackStatus = PointAttackStatus.Attacked;
@@ -103,16 +103,16 @@ namespace BattleshipStateTracker.Core
             {
                 if (AreAllShipsSunk)
                 {
-                    return PanelAttackedResult.AllShipsSunk;
+                    return BoardAttackedResult.AllShipsSunk;
                 }
                 else
                 {
-                    return PanelAttackedResult.ItWasAHit;
+                    return BoardAttackedResult.ItWasAHit;
                 }
             }
             else
             {
-                return PanelAttackedResult.ItWasAMiss;
+                return BoardAttackedResult.ItWasAMiss;
             }
         }
     }

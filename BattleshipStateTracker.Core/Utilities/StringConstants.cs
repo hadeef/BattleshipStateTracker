@@ -28,7 +28,7 @@
             public const string NotAttacked = "NotAttacked";
         }
 
-        public static class PanelAttackedResult
+        public static class BoardAttackedResult
         {
             public const string NoAttackPointAvailable = "Attack Result: No attack point available!";
             public const string AttackPointNotFound = "Attack Result: Attack point not found!";

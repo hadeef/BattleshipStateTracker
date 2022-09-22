@@ -2,21 +2,21 @@
 
 IPoint point = new Point(1, 1);
 
-Panel panel = new();
+Board board = new();
 
 for (int i = 1; i < 21; i++)
 {
     Destroyer? ship = new();
-    string? ss = panel.PlaceShip(ship);
+    string? ss = board.PlaceShip(ship);
 }
 
-IList<IPoint> av = panel.AvailablePoints;
-IList<IPoint> av2 = panel.UnAvailablePoints;
-bool av3 = panel.AreAllShipsSunk;
+IList<IPoint> av = board.AvailablePoints;
+IList<IPoint> av2 = board.UnAvailablePoints;
+bool av3 = board.AreAllShipsSunk;
 
-List<IPoint>? av4 = panel.Points.Where(p => p.ShipId != null).ToList();
+List<IPoint>? av4 = board.Points.Where(p => p.ShipId != null).ToList();
 
-string attackResult = panel.Attack(point);
+string attackResult = board.Attack(point);
 
 Console.WriteLine("Hello, World!");
 

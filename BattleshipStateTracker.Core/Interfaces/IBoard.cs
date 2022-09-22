@@ -1,6 +1,6 @@
 ﻿namespace BattleshipStateTracker.Core
 {
-    internal interface IPanel
+    internal interface IBoard
     {
         IList<IPoint> Points { get; }
         IList<IShip> Ships { get; }
