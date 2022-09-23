@@ -46,5 +46,13 @@
             public const string ShipAlreadyPlaced = "Ship already placed";
             public const string Successful = "Successful";
         }
+
+        public static class CoordinateCheckResult
+        {
+            public const string InputNotNumber = "Input number is not a number. Please enter a number!";
+            public const string InputNotInRange = "Input number is not in range.";
+            public const string InputInRange = "Input number is not in range.";
+
+        }
     }
 }

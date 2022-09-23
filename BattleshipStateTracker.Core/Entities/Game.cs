@@ -4,8 +4,8 @@
     {
         public Game()
         {
-            FirstPlayer = new Player();
-            SecondPlayer = new Player();
+            FirstPlayer = new Player("FirstPlayer");
+            SecondPlayer = new Player("SecondPlayer");
         }
 
         public IPlayer FirstPlayer { get; }

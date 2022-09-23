@@ -4,7 +4,7 @@ namespace BattleshipStateTracker.Core
 {
     public class Board : IBoard
     {
-        private const int dimension = 10;
+        public const int dimension = 10;
         public Board()
         {
             Points = new List<IPoint>();
