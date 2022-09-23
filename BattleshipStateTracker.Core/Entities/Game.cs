@@ -8,7 +8,7 @@
             SecondPlayer = new Player();
         }
 
-        public Player FirstPlayer { get; }
-        public Player SecondPlayer { get; }
+        public IPlayer FirstPlayer { get; }
+        public IPlayer SecondPlayer { get; }
     }
 }

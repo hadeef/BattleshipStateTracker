@@ -2,7 +2,7 @@
 {
     public interface IGame
     {
-        Player FirstPlayer { get; }
-        Player SecondPlayer { get; }
+        IPlayer FirstPlayer { get; }
+        IPlayer SecondPlayer { get; }
     }
 }

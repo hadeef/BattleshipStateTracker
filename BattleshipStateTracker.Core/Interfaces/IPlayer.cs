@@ -2,6 +2,6 @@
 {
     public interface IPlayer
     {
-        Board Board { get; }
+        IBoard Board { get; }
     }
 }

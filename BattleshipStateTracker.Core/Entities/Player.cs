@@ -8,6 +8,6 @@
             Board.PlaceShip(new Destroyer());
         }
 
-        public Board Board { get; }
+        public IBoard Board { get; }
     }
 }
