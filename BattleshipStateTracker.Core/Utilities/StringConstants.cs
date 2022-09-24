@@ -30,17 +30,19 @@
 
         public static class BoardAttackedResult
         {
+            public const string AttackPointNotInDimensionRange = "At least one of attack point coordinates are not in dimension range";
             public const string NoAttackPointAvailable = "Attack Result: No attack point available!";
             public const string AttackPointNotFound = "Attack Result: Attack point not found!";
             public const string AttackPointAlreadyBeenAttacked = "Attack Result: Attack point already been attacked!";
 
             public const string ItWasAHit = "Attack Result: It was a hit!";
             public const string ItWasAMiss = "Attack Result: It was a miss!";
-            public const string AllShipsSunk = "Attack Result: All the ships have sunk. Player has lost the game!";
+            public const string AllShipsSunk = "Attack Result: It was a hit!. All opponent ships have sunk. You won the game!";
         }
 
         public static class PlaceShipResult
         {
+            public const string ShipLengthNotInDimensionRange = "Ship Length is not in dimension range";
             public const string NoAvailablePoints = "No available points";
             public const string NotEnoughAvailablePoints = "Not enough available points";
             public const string ShipAlreadyPlaced = "Ship already placed";
@@ -49,10 +51,8 @@
 
         public static class CoordinateCheckResult
         {
-            public const string InputNotNumber = "Input number is not a number. Please enter a number!";
-            public const string InputNotInRange = "Input number is not in range.";
-            public const string InputInRange = "Input number is not in range.";
-
+            public const string InputNotNumber = "At least one of input coordinates are not number!";
+            public const string TwoInputCoordinatesNeeded = "Two input coordinates needed!";
         }
     }
 }

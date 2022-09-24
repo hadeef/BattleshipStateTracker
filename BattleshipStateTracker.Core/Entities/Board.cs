@@ -4,7 +4,7 @@ namespace BattleshipStateTracker.Core
 {
     public class Board : IBoard
     {
-        public const int dimension = 10;
+        public const uint dimension = 10;
         public Board()
         {
             Points = new List<IPoint>();
@@ -31,6 +31,17 @@ namespace BattleshipStateTracker.Core
                                        && UnAvailablePoints.All(point => point.AttackResultStatus == PointAttackedResultStatus.Hit);
 
         /// <summary>
+        /// Checks if a number is in board dimension range or not.
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        private bool IsInDimensionRange(uint number)
+        {
+            bool isInDimensionRange = Enumerable.Range(1, (int)dimension).Contains((int)number);
+            return isInDimensionRange;
+        }
+
+        /// <summary>
         /// Checks if ship already placed on board or not.
         /// </summary>
         /// <param name="ship"></param>
@@ -48,6 +59,12 @@ namespace BattleshipStateTracker.Core
         /// <returns>Returns true after adding ship to board or false if not able to add.</returns>
         public string PlaceShip(IShip ship)
         {
+            bool isShipLengthInDimensionRange = IsInDimensionRange(ship.Length);
+            if (!isShipLengthInDimensionRange)
+            {
+                return PlaceShipResult.ShipLengthNotInDimensionRange;
+            }
+
             if (AvailablePoints.Count == 0)
             {
                 return PlaceShipResult.NoAvailablePoints;
@@ -78,6 +95,13 @@ namespace BattleshipStateTracker.Core
         public string Attack(IPoint attackPoint)
         {
             IPoint? point;
+
+            bool isAttackPointColumnInDimensionRange = IsInDimensionRange(attackPoint.Column);
+            bool isAttackPointRowInDimensionRange = IsInDimensionRange(attackPoint.Column);
+            if (!(isAttackPointColumnInDimensionRange && isAttackPointRowInDimensionRange))
+            {
+                return BoardAttackedResult.AttackPointNotInDimensionRange;
+            }
 
             if (NotAttackedPoints.Count == 0)
             {
