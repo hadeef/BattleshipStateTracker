@@ -7,13 +7,12 @@ namespace BattleshipStateTrackerUnitTest
     [TestClass]
     public class BoardTests
     {
-        private MockRepository mockRepository;
+        private MockRepository? mockRepository;
 
         [TestInitialize]
         public void TestInitialize()
         {
             mockRepository = new MockRepository(MockBehavior.Strict);
-
         }
 
         private Board CreateBoard()
@@ -40,7 +39,6 @@ namespace BattleshipStateTrackerUnitTest
             Assert.AreEqual(board.Ships.Count, 10);
             Assert.AreEqual(board.AvailablePoints.Count, 0);
             Assert.AreEqual(board.UnAvailablePoints.Count, 100);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -55,7 +53,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(shipPlacementresult, PlaceShipResult.ShipLengthNotInDimensionRange);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -75,7 +72,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(shipPlacementresult, PlaceShipResult.NoAvailablePoints);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -95,7 +91,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(shipPlacementresult, PlaceShipResult.NotEnoughAvailablePoints);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -111,7 +106,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(shipPlacementresult, PlaceShipResult.ShipAlreadyPlaced);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -126,7 +120,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(attackResult, BoardAttackedResult.AttackPointNotInDimensionRange);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -144,7 +137,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(attackResult, BoardAttackedResult.AttackPointAlreadyBeenAttacked);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -161,7 +153,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(attackResult, BoardAttackedResult.ItWasAMiss);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -178,7 +169,6 @@ namespace BattleshipStateTrackerUnitTest
 
             // Assert
             Assert.AreEqual(attackResult, BoardAttackedResult.ItWasAHit);
-            mockRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -200,7 +190,6 @@ namespace BattleshipStateTrackerUnitTest
             // Assert
             Assert.AreEqual(board.AreAllShipsSunk, true);
             Assert.AreEqual(attackResult, BoardAttackedResult.AllShipsSunk);
-            mockRepository.VerifyAll();
         }
     }
 }

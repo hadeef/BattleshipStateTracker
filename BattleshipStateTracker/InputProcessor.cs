@@ -27,7 +27,6 @@ namespace BattleshipStateTracker
             string attackedResult = game.SecondPlayer.Board.Attack(point);
 
             return attackedResult;
-
         }
     }
 }
