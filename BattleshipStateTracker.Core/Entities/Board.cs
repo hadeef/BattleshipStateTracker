@@ -103,11 +103,6 @@ namespace BattleshipStateTracker.Core
                 return BoardAttackedResult.AttackPointNotInDimensionRange;
             }
 
-            if (NotAttackedPoints.Count == 0)
-            {
-                return BoardAttackedResult.NoAttackPointAvailable;
-            }
-
             point = AttackedPoints.GetMatchPoint(attackPoint);
             if (point is not null)
             {

@@ -31,7 +31,6 @@
         public static class BoardAttackedResult
         {
             public const string AttackPointNotInDimensionRange = "At least one of attack point coordinates are not in dimension range";
-            public const string NoAttackPointAvailable = "Attack Result: No attack point available!";
             public const string AttackPointNotFound = "Attack Result: Attack point not found!";
             public const string AttackPointAlreadyBeenAttacked = "Attack Result: Attack point already been attacked!";
 
