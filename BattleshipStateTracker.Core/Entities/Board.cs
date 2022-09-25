@@ -21,7 +21,7 @@ namespace BattleshipStateTracker.Core
 
         public IList<IPoint> Points { get; }
 
-        public IList<IShip> Ships { get; set; }
+        public IList<IShip> Ships { get; private set; }
 
         public IList<IPoint> AvailablePoints => Points.Where(p => p.OccupancyStatus == PointOccupancyStatus.Available).ToList();
         public IList<IPoint> UnAvailablePoints => Points.Where(p => p.OccupancyStatus == PointOccupancyStatus.Occupied).ToList();
