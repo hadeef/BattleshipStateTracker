@@ -27,7 +27,7 @@ namespace BattleshipStateTracker.Core
         public IList<IPoint> UnAvailablePoints => Points.Where(p => p.OccupancyStatus == PointOccupancyStatus.Occupied).ToList();
         public IList<IPoint> AttackedPoints => Points.Where(p => p.AttackStatus == PointAttackStatus.Attacked).ToList();
         public IList<IPoint> NotAttackedPoints => Points.Where(p => p.AttackStatus == PointAttackStatus.NotAttacked).ToList();
-        public bool AreAllShipsSunk => (UnAvailablePoints is not null) && (UnAvailablePoints.Count > 0)
+        public bool AreAllShipsSunk => (UnAvailablePoints.Count > 0)
                                        && UnAvailablePoints.All(point => point.AttackResultStatus == PointAttackedResultStatus.Hit);
 
         /// <summary>
